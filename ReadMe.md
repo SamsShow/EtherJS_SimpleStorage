@@ -1,0 +1,1 @@
+Deploying Our Soldity Contract using local JavaScript VM
