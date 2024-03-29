@@ -11,3 +11,6 @@ node_modules/
 
 # Ignore .env files
 .env
+
+# Ignore encrypted.json files
+encrypted.json

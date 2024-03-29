@@ -14,8 +14,15 @@ async function main() {
   // Create a provider to connect to the blockchain
   const provider = new JsonRpcProvider(process.env.RPC_URL);
 
+  const encryptedJson = fs.readFileSync("./encrypted.json", "utf8");
+  let wallet = await ethers.Wallet.fromEncryptedJson(
+    encryptedJson,
+    process.env.PRIVATE_KEY_PASSWORD
+  );
+  wallet = wallet.connect(provider);
+
   // Create a wallet to interact with the blockchain
-  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+  // const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
   // Read the contract's ABI (Application Binary Interface) from a file
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
@@ -42,7 +49,7 @@ async function main() {
   console.log(contract);
   // Get Number
   const currentFavoriteNumber = await contract.retrieve();
-  const transactionResponse = await contract.store("69");
+  const transactionResponse = await contract.store("99");
   const transactionReceipt = await transactionResponse.wait(1);
   const updatedFavoriteNumber = await contract.retrieve();
   console.log("Current Favorite Number:", currentFavoriteNumber);
