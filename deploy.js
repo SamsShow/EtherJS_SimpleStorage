@@ -1,4 +1,4 @@
-const { ethers, JsonRpcProvider } = require('ethers')
+const { ethers, JsonRpcProvider } = require("ethers");
 const fs = require("fs-extra");
 
 /**
@@ -10,11 +10,9 @@ async function main() {
   //compile them in our code
   //compile them seperatly
   //http://127.0.0.1:7545
-  
+
   // Create a provider to connect to the blockchain
-  const provider = new JsonRpcProvider(
-    "http://127.0.0.1:7545"
-  );
+  const provider = new JsonRpcProvider("http://127.0.0.1:7545");
 
   // Create a wallet to interact with the blockchain
   const wallet = new ethers.Wallet(
@@ -38,6 +36,11 @@ async function main() {
 
   // Deploy the contract to the blockchain
   const contract = await ContractFactory.deploy(); // Stop here and wait for the contract to deploy
+
+  // const transaction = await contract.deployTransaction.wait(1);
+  // console.log("Here is the deployment transition", deploytransaction);
+  // console.log("Contract deployed to:", contract.address);
+  // console.log("Here is the transaction receipt", transaction);
 
   console.log(contract);
 
