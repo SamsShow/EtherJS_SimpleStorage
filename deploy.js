@@ -43,6 +43,13 @@ async function main() {
   // console.log("Here is the transaction receipt", transaction);
 
   console.log(contract);
+  // Get Number
+  const currentFavoriteNumber = await contract.retrieve();
+  const transactionResponse = await contract.store("42");
+  const transactionReceipt = await transactionResponse.wait(1);
+  const updatedFavoriteNumber = await contract.retrieve();
+  console.log("Current Favorite Number:", currentFavoriteNumber);
+  console.log("Updated Favorite Number:", updatedFavoriteNumber);
 
   try {
     // Additional code to interact with the deployed contract can be added here
