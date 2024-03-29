@@ -1,6 +1,6 @@
 const { ethers, JsonRpcProvider } = require("ethers");
 const fs = require("fs-extra");
-
+require("dotenv").config();
 /**
  * Deploys a contract to the blockchain.
  * @returns {Promise<void>} A promise that resolves when the contract is deployed.
@@ -12,13 +12,10 @@ async function main() {
   //http://127.0.0.1:7545
 
   // Create a provider to connect to the blockchain
-  const provider = new JsonRpcProvider("http://127.0.0.1:7545");
+  const provider = new JsonRpcProvider(process.env.RPC_URL);
 
   // Create a wallet to interact with the blockchain
-  const wallet = new ethers.Wallet(
-    "0xe1a36e9eaf858414f94c50e63df5683d0dfa1ba20ed67c312d4b26c688d65ac0",
-    provider
-  );
+  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
   // Read the contract's ABI (Application Binary Interface) from a file
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
@@ -45,7 +42,7 @@ async function main() {
   console.log(contract);
   // Get Number
   const currentFavoriteNumber = await contract.retrieve();
-  const transactionResponse = await contract.store("42");
+  const transactionResponse = await contract.store("69");
   const transactionReceipt = await transactionResponse.wait(1);
   const updatedFavoriteNumber = await contract.retrieve();
   console.log("Current Favorite Number:", currentFavoriteNumber);

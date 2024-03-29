@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
     "fs": "^0.0.1-security",
     "fs-extra": "^11.2.0",
