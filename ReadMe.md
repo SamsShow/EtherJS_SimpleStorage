@@ -4,7 +4,8 @@ Deploying Our Soldity Contract using local JavaScript VM
 
 ```npm install --save ethers```
 
-```npm install solc```
+```npm install --global solc@0.8.17```
+```solcjs --abi --bin .\SimpleStorage.sol```
 
 ```npm install --save fs-extra```
 
